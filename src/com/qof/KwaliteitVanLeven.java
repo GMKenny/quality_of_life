@@ -1,9 +1,11 @@
 package com.qof;
 
 public interface KwaliteitVanLeven {
-    public String getAllString();
-    public String getAandoeningenString();
-    public String getLeeftijdsverwachtingString();
+    public String toString();
+    public String getAandoeningen();
+    public String getLeeftijdsverwachting();
+    public String getKwaliteitVanLeven();
+    public String Yearpassed();
 
 
 
