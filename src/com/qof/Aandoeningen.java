@@ -5,14 +5,17 @@ public class Aandoeningen {
     private final double verkortingLevensverwachting;
     private final double levensKwaliteit;
     private final double zichtbaarheid;
-    private final boolean doodelijk;
+    private final boolean ernst;
+    private final boolean soa;
 
-    public Aandoeningen(String naam, double verkortingLevensverwachting, double levensKwaliteit, double zichtbaarheid, boolean doodelijk){
+    public Aandoeningen(String naam, double verkortingLevensverwachting, double levensKwaliteit, double zichtbaarheid, boolean ernst, boolean soa){
         this.naam = naam;
         this.verkortingLevensverwachting = verkortingLevensverwachting;
         this.levensKwaliteit = levensKwaliteit;
         this.zichtbaarheid = zichtbaarheid;
-        this.doodelijk = doodelijk;
+        this.ernst = ernst;
+        this.soa = soa;
+
     }
 
     public double getLevensKwaliteit() {
@@ -23,9 +26,22 @@ public class Aandoeningen {
         return verkortingLevensverwachting;
     }
 
+    public double getZichtbaarheid(){ return zichtbaarheid; }
+
+    public boolean getDoodelijkheid(){ return ernst; }
+
+    public boolean getSoa(){ return soa;}
+
+    public String equals(Aandoeningen aandoeningen){
+        if (this == aandoeningen){
+            return this.naam + " is gelijk aan " + aandoeningen.naam;
+        }
+        return this.naam + " is niet gelijk aan " + aandoeningen.naam;
+    }
+
     public String getNaam() { return naam; }
 
     public String toString(){
-        return "Aandoening: " + naam + "\nVerkorte levensverwachting: " + verkortingLevensverwachting + " Jaar \nKwaliteit van leven: " + levensKwaliteit +"\n";
+        return "Aandoening: " + naam  + "\nKwaliteit van leven: " + levensKwaliteit +"\n";
     }
 }
