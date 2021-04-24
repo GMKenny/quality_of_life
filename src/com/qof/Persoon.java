@@ -3,7 +3,7 @@ package com.qof;
 public class Persoon {
     private final String naam;
     private final String geslacht;
-    private final int leeftijd;
+    private int leeftijd;
 
 
     public Persoon(String naam, String geslacht, int leeftijd){
@@ -21,6 +21,10 @@ public class Persoon {
     }
 
     public int getLeeftijd() { return leeftijd; }
+
+    public void setleeftijd(int leeftijd){
+        this.leeftijd = leeftijd;
+    }
 }
 
 
