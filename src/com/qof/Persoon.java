@@ -4,6 +4,7 @@ public class Persoon {
     private final String naam;
     private final String geslacht;
     private int leeftijd;
+    private boolean levend = true;
 
 
     public Persoon(String naam, String geslacht, int leeftijd){
@@ -22,8 +23,16 @@ public class Persoon {
 
     public int getLeeftijd() { return leeftijd; }
 
-    public void setleeftijd(int leeftijd){
+    public void setLeeftijd(int leeftijd){
         this.leeftijd = leeftijd;
+    }
+
+    public boolean getLevend(){
+        return levend;
+    }
+
+    public void setLevend(boolean levend){
+        this.levend = levend;
     }
 }
 

@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class Baby extends Persoon implements KwaliteitVanLeven{
     private final Leeftijdcategory leeftijdCategory;
-    private final double levensVerwachting = 85;
-    private final double levensKwaliteit = 10;
     private final Set<Aandoeningen> aandoeningen = new HashSet<>();
 
     public Baby(String naam, String geslacht, int leeftijd, Leeftijdcategory leeftijdCategory) {
@@ -15,16 +13,40 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
         this.leeftijdCategory = leeftijdCategory;
     }
 
-    public void setAandoening(Aandoeningen newAandoeningen){
-        this.aandoeningen.add(newAandoeningen);
+    public void setAandoening(Aandoeningen aandoeningen){
+        this.aandoeningen.add(aandoeningen);
     }
 
+    public String babyCry(){
+        return getNaam() + ": Mweeehhh";
+    }
+
+    private boolean babyExtreemHuilen(){
+        boolean cry = false;
+        if (getKwaliteitVanLeven() < 3){
+            if (Math.random() < 0.5){
+                cry = true;
+            }
+        }
+        return cry;
+    }
+
+    private boolean oudersMerkenOp(){
+        boolean notice = false;
+        if (babyExtreemHuilen()){
+            if (Math.random() < 0.5){
+                notice = true;
+            }
+        }
+        return notice;
+    }
 
     @Override
     public String toString() {
         String samenvatting;
-        samenvatting = "Naam: " + getNaam() + "\nGeslacht: " + getGeslacht() + "\nLeeftijds Category: " +
-                leeftijdCategory.toString() + "\n" +  getLeeftijdsverwachting() + "\n"+  getKwaliteitVanLeven() + getAandoeningen();
+        samenvatting = "Naam: " + getNaam() + "\nGeslacht: " + getGeslacht() + "\nlevend: " +  getLevend() + "\nLeeftijd: "+ getLeeftijd()  +  "\nLeeftijds Category: " +
+                leeftijdCategory.toString() + "\nVerwachte Levensverwachting: " +  getLeeftijdsverwachting() + " jaar."+ "\n"+
+                "Verwachte Levens kwaliteit: " + getKwaliteitVanLeven() + getAandoeningen();
         return samenvatting;
     }
 
@@ -35,35 +57,89 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
             Aandoeningen += "\nHeeft de geen aandoeningen\n";
             return Aandoeningen;
         }
-        Aandoeningen +=  "\nTotaal aantal aandoeningen: " + aandoeningen.size() + "\nHeeft de volgende aandoeningen:\n";
+        Aandoeningen +=  "\nTotaal aantal aandoeningen: " + aandoeningen.size() + "\nHeeft de volgende aandoeningen:";
         for ( Aandoeningen aandoeningen : aandoeningen){
-            Aandoeningen += aandoeningen.toString() + "\n";
+            Aandoeningen += "\n" + aandoeningen.toString();
         }
         return Aandoeningen;
     }
 
     @Override
-    public String getLeeftijdsverwachting() {
-        double leeftijdsverwachting = this.levensVerwachting - getLeeftijd();
+    public double getLeeftijdsverwachting() {
+        double levensVerwachting = 85;
+        double leeftijdsverwachting = levensVerwachting;
         for ( Aandoeningen aandoeningen : aandoeningen){
             leeftijdsverwachting -= aandoeningen.getVerkortingLevensverwachting();
         }
-        return "Verwachte Leeftijdverwachting: " + (int)leeftijdsverwachting;
+        if (leeftijdsverwachting < 0){
+            return 0;
+        }
+        return (int)leeftijdsverwachting;
     }
 
     @Override
-    public String getKwaliteitVanLeven() {
-        double levensKwaliteit = this.levensKwaliteit;
+    public double getKwaliteitVanLeven() {
+        double levensKwaliteit = 10;
         for ( Aandoeningen aandoeningen : aandoeningen){
             levensKwaliteit = (levensKwaliteit - (levensKwaliteit - aandoeningen.getLevensKwaliteit()));
         }
 
-        return "Verwachte Levens kwaliteit: " + Math.round(levensKwaliteit * 100.0) / 100.0;
+        return Math.round(levensKwaliteit * 100.0) / 100.0;
+    }
+
+    @Override
+    public double getZichtbaarheid() {
+        double zichtbaar = 0;
+        for ( Aandoeningen aandoeningen : aandoeningen){
+            zichtbaar += aandoeningen.getZichtbaarheid();
+        }
+        return zichtbaar;
+    }
+
+    @Override
+    public boolean getErnst() {
+        boolean Ernst = false ;
+        for ( Aandoeningen aandoeningen : aandoeningen){
+            if (aandoeningen.getDoodelijkheid()) {
+                Ernst = true;
+                break;
+            }
+        }
+        return Ernst;
     }
 
     @Override
     public String Yearpassed() {
-        return null;
+        if (getLevend()){
+            setLeeftijd(getLeeftijd() + 1);
+            if (getErnst()){
+                if (babyExtreemHuilen()){
+                    if (oudersMerkenOp()){
+                        return getNaam() + ": is naar het ziekenhuis gebracht.";
+                    }
+                }
+
+                if (getZichtbaarheid() > 5){
+                    return getNaam() + ": is naar het ziekenhuis gebracht.";
+                }
+                setLevend(false);
+                return getNaam() + ": Is helaas overleden";
+            }
+
+            if (getLeeftijdsverwachting() == getLeeftijd()){
+                return  getNaam() + ": Is overleden op een" + getLeeftijd() + "jarige leeftijd.";
+            }
+
+            return getNaam() + ": Heeft het 1 jaar langer overleefd.";
+        }
+        return "";
+    }
+
+    public String equals(Baby baby) {
+        if (this == baby){
+            return "Dit is dezelfde baby";
+        }
+        return "Dit zijn niet dezelfde baby's";
     }
 
 
