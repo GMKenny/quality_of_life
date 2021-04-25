@@ -3,7 +3,7 @@ package com.qof;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Kind extends Persoon implements KwaliteitVanLeven{
+public class Kind extends Persoon implements Patiënt {
     private final Leeftijdcategory leeftijdCategory;
     private Set<Aandoeningen> aandoeningen = new HashSet<>();
 
@@ -72,6 +72,12 @@ public class Kind extends Persoon implements KwaliteitVanLeven{
     }
 
     @Override
+    public boolean heeftAandoenigen() {
+        return !aandoeningen.isEmpty();
+    }
+
+
+    @Override
     public double getLeeftijdsverwachting() {
         double levensVerwachting = 80;
         double leeftijdsverwachting = levensVerwachting;
@@ -134,6 +140,7 @@ public class Kind extends Persoon implements KwaliteitVanLeven{
             }
 
             if (getLeeftijdsverwachting() == getLeeftijd()){
+                setLevend(false);
                 return  getNaam() + ": Is overleden op een" + getLeeftijd() + "jarige leeftijd.";
             }
 
@@ -145,9 +152,9 @@ public class Kind extends Persoon implements KwaliteitVanLeven{
 
     public String equals(Kind kind) {
         if (this == kind){
-            return "Dit is het zelfde kind";
+            return getNaam() +  " is het zelfde kind als " + kind.getNaam() ;
         }
-        return "Dit is niet het zelfde kind";
+        return getNaam() + " is niet het zelfde kind als " + kind.getNaam();
     }
 
 

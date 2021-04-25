@@ -1,10 +1,9 @@
 package com.qof;
 
-import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Baby extends Persoon implements KwaliteitVanLeven{
+public class Baby extends Persoon implements Patiënt {
     private final Leeftijdcategory leeftijdCategory;
     private final Set<Aandoeningen> aandoeningen = new HashSet<>();
 
@@ -54,7 +53,7 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
     public String getAandoeningen() {
         String Aandoeningen = "";
         if (aandoeningen.isEmpty()){
-            Aandoeningen += "\nHeeft de geen aandoeningen\n";
+            Aandoeningen += "\nHeeft geen aandoeningen\n";
             return Aandoeningen;
         }
         Aandoeningen +=  "\nTotaal aantal aandoeningen: " + aandoeningen.size() + "\nHeeft de volgende aandoeningen:";
@@ -63,6 +62,15 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
         }
         return Aandoeningen;
     }
+
+    @Override
+    public boolean heeftAandoenigen() {
+        if (aandoeningen.isEmpty() || !this.getLevend()){
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public double getLeeftijdsverwachting() {
@@ -127,6 +135,7 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
             }
 
             if (getLeeftijdsverwachting() == getLeeftijd()){
+                setLevend(false);
                 return  getNaam() + ": Is overleden op een" + getLeeftijd() + "jarige leeftijd.";
             }
 
@@ -137,9 +146,10 @@ public class Baby extends Persoon implements KwaliteitVanLeven{
 
     public String equals(Baby baby) {
         if (this == baby){
-            return "Dit is dezelfde baby";
+            return getNaam() +  " is het zelfde baby als " + baby.getNaam() ;
         }
-        return "Dit zijn niet dezelfde baby's";
+        return getNaam() +  " is het zelfde baby als " + baby.getNaam() ;
+
     }
 
 

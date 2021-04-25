@@ -1,10 +1,9 @@
 package com.qof;
 
-import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Puber extends Persoon implements KwaliteitVanLeven{
+public class Puber extends Persoon implements Patiënt {
     private final Leeftijdcategory leeftijdCategory;
     private Set<Aandoeningen> aandoeningen = new HashSet<>();
 
@@ -46,6 +45,12 @@ public class Puber extends Persoon implements KwaliteitVanLeven{
         }
         return Aandoeningen;
     }
+
+    @Override
+    public boolean heeftAandoenigen() {
+        return !aandoeningen.isEmpty();
+    }
+
 
     @Override
     public double getLeeftijdsverwachting() {
@@ -105,6 +110,7 @@ public class Puber extends Persoon implements KwaliteitVanLeven{
             }
 
             if (getLeeftijdsverwachting() == getLeeftijd()){
+                setLevend(false);
                 return  getNaam() + ": Is overleden op een" + getLeeftijd() + "jarige leeftijd.";
             }
 
@@ -116,9 +122,10 @@ public class Puber extends Persoon implements KwaliteitVanLeven{
 
     public String equals(Puber puber) {
         if (this == puber){
-            return "Dit is de zelfde puber";
+            return getNaam() +  " is dezelfde puber als " + puber.getNaam() ;
         }
-        return "Dit is niet de zelfde puber";
+        return getNaam() +  " is niet dezelfde puber als " + puber.getNaam() ;
+
 
     }
 
