@@ -95,7 +95,7 @@ public class Senior extends Persoon implements Patiënt {
 
 
     @Override
-    public String Yearpassed() {
+    public String yearPassed() {
         if (getLevend()){
             setLeeftijd(getLeeftijd() + 1);
             if (getErnst()){

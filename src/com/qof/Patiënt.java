@@ -11,7 +11,7 @@ public interface Patiënt {
     public double getKwaliteitVanLeven();
     public double getZichtbaarheid();
     public boolean getErnst();
-    public String Yearpassed();
+    public String yearPassed();
 
 
 

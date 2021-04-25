@@ -41,14 +41,14 @@ public class Main {
         System.out.println(babyTwee.toString());
 
         System.out.println(babyEen.babyCry());
-        System.out.println(babyEen.Yearpassed());
-        System.out.println(babyTwee.Yearpassed());
-        System.out.println(kindEen.Yearpassed());
+        System.out.println(babyEen.yearPassed());
+        System.out.println(babyTwee.yearPassed());
+        System.out.println(kindEen.yearPassed());
         System.out.println(kindEen.buitenSpelen(rinovirus));
         System.out.println(puberEen.gaatNaarFestival());
         System.out.println(puberTwee.gaatNaarFestival());
         System.out.println(seniorEen.kennisGeven(volwassenVier));
-        System.out.println(seniorEen.Yearpassed());
+        System.out.println(seniorEen.yearPassed());
         System.out.println(volwassenEen.relaatsiesMetElkaar(volwassenTwee));
         System.out.println(volwassenDrie.relaatsiesMetElkaar(volwassenVier));
         System.out.println(volwassenTwee.relaatsiesMetElkaar(volwassenVier));
